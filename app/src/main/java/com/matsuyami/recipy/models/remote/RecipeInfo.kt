@@ -3,7 +3,7 @@ package com.recipy.models
 
 import com.google.gson.annotations.SerializedName
 
-data class Result(
+data class RecipeInfo(
     @SerializedName("approved_at")
     val approvedAt: Int,
     @SerializedName("aspect_ratio")
