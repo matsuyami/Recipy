@@ -25,7 +25,7 @@ class RecipeSearchActivity : AppCompatActivity() {
     private lateinit var recipeInfoAdapter : RecipeInfoAdapter
 
     val TAG = "RecipeSearchActivity"
-    // User Interface day ///////////////////////////////////////////////////////////////////////// (RecyclerView)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipesearch)

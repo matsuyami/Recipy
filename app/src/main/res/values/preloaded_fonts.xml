@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/josefinsans_light</item>
+        <item>@font/josefinsans_extralight</item>
+        <item>@font/josefinsans_regular</item>
+        <item>@font/josefinsans_thin</item>
+    </array>
+</resources>
