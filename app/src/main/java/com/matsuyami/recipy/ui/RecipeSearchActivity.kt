@@ -3,13 +3,11 @@ package com.matsuyami.recipy.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.FrameLayout
-import android.widget.GridLayout
-import android.widget.SearchView
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.*
 import com.matsuyami.recipy.R
@@ -59,19 +57,25 @@ class RecipeSearchActivity : AppCompatActivity() {
             }
         })
         setupRecyclerView()
-        setupSearchView()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu, menu)
+        val menuItem = menu?.findItem(R.id.action_search)
+        setupSearchView(menuItem)
+
+        return super.onCreateOptionsMenu(menu)
+    }
     private fun setupRecyclerView(){
         recipeInfoAdapter = RecipeInfoAdapter()
         rvRecipeInfo = findViewById(R.id.rvRecipeInfo)
         rvRecipeInfo.apply {
             adapter = recipeInfoAdapter
             layoutManager = FlexboxLayoutManager(this@RecipeSearchActivity).apply{
-                justifyContent = JustifyContent.SPACE_EVENLY
-                alignItems= AlignItems.CENTER
-                flexDirection = FlexDirection.ROW
-                flexWrap = FlexWrap.WRAP
+            justifyContent = JustifyContent.SPACE_EVENLY
+            alignItems= AlignItems.CENTER
+            flexDirection = FlexDirection.ROW
+            flexWrap = FlexWrap.WRAP
             }
         }
     }
@@ -82,8 +86,8 @@ class RecipeSearchActivity : AppCompatActivity() {
     private fun showProgressBar(){
     }
 
-    private fun setupSearchView(){
-        searchView = findViewById(R.id.svRecipes)
+    private fun setupSearchView(menuItem : MenuItem?){
+        searchView = menuItem?.actionView as SearchView
         searchView.queryHint = "Search an ingredient..."
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextChange(query: String?): Boolean {
