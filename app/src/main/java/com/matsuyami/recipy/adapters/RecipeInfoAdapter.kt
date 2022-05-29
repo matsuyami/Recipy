@@ -1,6 +1,5 @@
 package com.matsuyami.recipy.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,6 @@ import com.recipy.models.RecipeInfo
 class RecipeInfoAdapter : RecyclerView.Adapter<RecipeInfoAdapter.RecipeViewHolder>(){
     inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val tvRecipeHeader: TextView = itemView.findViewById(R.id.tvHeader)
-
         private val ivFood : ImageView = itemView.findViewById(R.id.ivFood)
 
         fun bind(item: RecipeInfo){
@@ -52,7 +50,7 @@ class RecipeInfoAdapter : RecyclerView.Adapter<RecipeInfoAdapter.RecipeViewHolde
         holder.bind(recipeInfo)
     }
 
-    override fun getItemCount(): Int {
+    override fun getItemCount() : Int {
         return differ.currentList.size
     }
 

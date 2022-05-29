@@ -68,10 +68,10 @@ class RecipeSearchActivity : AppCompatActivity() {
         rvRecipeInfo.apply {
             adapter = recipeInfoAdapter
             layoutManager = FlexboxLayoutManager(this@RecipeSearchActivity).apply{
-                justifyContent = JustifyContent.SPACE_EVENLY
-                alignItems= AlignItems.CENTER
-                flexDirection = FlexDirection.ROW
-                flexWrap = FlexWrap.WRAP
+            justifyContent = JustifyContent.SPACE_EVENLY
+            alignItems= AlignItems.CENTER
+            flexDirection = FlexDirection.ROW
+            flexWrap = FlexWrap.WRAP
             }
         }
     }
