@@ -2,6 +2,7 @@ package com.recipy.models
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class SectionX(
     @SerializedName("components")
@@ -10,4 +11,4 @@ data class SectionX(
     val name: Any,
     @SerializedName("position")
     val position: Int
-)
+): Serializable

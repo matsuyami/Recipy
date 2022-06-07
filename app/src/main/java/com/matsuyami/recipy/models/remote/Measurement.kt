@@ -2,6 +2,7 @@ package com.recipy.models
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Measurement(
     @SerializedName("id")
@@ -10,4 +11,4 @@ data class Measurement(
     val quantity: String,
     @SerializedName("unit")
     val unit: Unit
-)
+): Serializable

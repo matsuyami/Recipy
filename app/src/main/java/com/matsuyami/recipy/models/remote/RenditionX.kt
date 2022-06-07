@@ -2,6 +2,7 @@ package com.recipy.models
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class RenditionX(
     @SerializedName("aspect")
@@ -30,4 +31,4 @@ data class RenditionX(
     val url: String,
     @SerializedName("width")
     val width: Int
-)
+): Serializable

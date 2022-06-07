@@ -2,6 +2,7 @@ package com.recipy.models
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Unit(
     @SerializedName("abbreviation")
@@ -14,4 +15,4 @@ data class Unit(
     val name: String,
     @SerializedName("system")
     val system: String
-)
+): Serializable

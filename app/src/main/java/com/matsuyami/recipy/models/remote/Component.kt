@@ -2,6 +2,7 @@ package com.recipy.models
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Component(
     @SerializedName("extra_comment")
@@ -16,4 +17,4 @@ data class Component(
     val position: Int,
     @SerializedName("raw_text")
     val rawText: String
-)
+): Serializable

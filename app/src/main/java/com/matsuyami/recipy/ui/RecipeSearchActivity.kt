@@ -1,5 +1,6 @@
 package com.matsuyami.recipy.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -28,6 +29,16 @@ class RecipeSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipesearch)
 
+        setupRecyclerView()
+
+        recipeInfoAdapter.setOnItemClickListener {
+            val intent = Intent(this@RecipeSearchActivity, RecipeInfoActivity::class.java)
+            intent.apply{
+                putExtra("recipeInfo", it)
+            }
+            startActivity(intent)
+        }
+
         val recipeRepo = RecipeSearchRepo()
         val viewModelProviderFactory = RecipeSearchProvider(recipeRepo)
         viewModel = ViewModelProvider(this, viewModelProviderFactory)[RecipeSearchVM::class.java]
@@ -42,6 +53,8 @@ class RecipeSearchActivity : AppCompatActivity() {
                             it.description.isNotEmpty() &&
                             it.totalTimeTier != null
                         })
+
+
                         Log.d(TAG, recipeResp.results.toString())
                     }
                 }
@@ -56,7 +69,6 @@ class RecipeSearchActivity : AppCompatActivity() {
                 }
             }
         })
-        setupRecyclerView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -68,6 +80,7 @@ class RecipeSearchActivity : AppCompatActivity() {
     }
     private fun setupRecyclerView(){
         recipeInfoAdapter = RecipeInfoAdapter()
+
         rvRecipeInfo = findViewById(R.id.rvRecipeInfo)
         rvRecipeInfo.apply {
             adapter = recipeInfoAdapter
@@ -78,6 +91,7 @@ class RecipeSearchActivity : AppCompatActivity() {
             flexWrap = FlexWrap.WRAP
             }
         }
+
     }
 
     private fun hideProgressBar(){

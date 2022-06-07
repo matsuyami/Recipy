@@ -2,6 +2,7 @@ package com.recipy.models
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class RecipeInfo(
     @SerializedName("approved_at")
@@ -106,4 +107,4 @@ data class RecipeInfo(
     val videoUrl: Any,
     @SerializedName("yields")
     val yields: String
-)
+): Serializable

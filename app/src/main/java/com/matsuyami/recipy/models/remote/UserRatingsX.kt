@@ -2,6 +2,7 @@ package com.recipy.models
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class UserRatingsX(
     @SerializedName("count_negative")
@@ -10,4 +11,4 @@ data class UserRatingsX(
     val countPositive: Int,
     @SerializedName("score")
     val score: Any
-)
+): Serializable

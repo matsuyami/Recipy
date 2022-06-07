@@ -2,6 +2,7 @@ package com.recipy.models
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class InstructionX(
     @SerializedName("appliance")
@@ -18,4 +19,4 @@ data class InstructionX(
     val startTime: Int,
     @SerializedName("temperature")
     val temperature: Int
-)
+): Serializable

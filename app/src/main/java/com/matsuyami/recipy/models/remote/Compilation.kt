@@ -2,6 +2,7 @@ package com.recipy.models
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Compilation(
     @SerializedName("approved_at")
@@ -48,4 +49,4 @@ data class Compilation(
     val videoId: Int,
     @SerializedName("video_url")
     val videoUrl: String
-)
+) : Serializable
