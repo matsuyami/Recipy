@@ -1,5 +1,6 @@
 package com.matsuyami.recipy.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,16 +17,18 @@ class RecipeInfoAdapter : RecyclerView.Adapter<RecipeInfoAdapter.RecipeViewHolde
     inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         private val tvRecipeHeader: TextView = itemView.findViewById(R.id.tvHeader)
         private val ivFood : ImageView = itemView.findViewById(R.id.ivFood)
-
         fun bind(item: RecipeInfo){
             tvRecipeHeader.text = item.name
-
             // rounds corners
             ivFood.clipToOutline = true
             Glide.with(itemView).load(item.thumbnailUrl).into(ivFood)
-
+            itemView.apply{
+                setOnClickListener{ onItemClickListener?.let{ it(item) } }
+            }
         }
     }
+
+    private var onItemClickListener: ((RecipeInfo) -> Unit)? = null
 
     private val differCallback = object : DiffUtil.ItemCallback<RecipeInfo>(){
         override fun areItemsTheSame(oldItem: RecipeInfo, newItem: RecipeInfo) : Boolean {
@@ -36,6 +39,7 @@ class RecipeInfoAdapter : RecyclerView.Adapter<RecipeInfoAdapter.RecipeViewHolde
             return oldItem == newItem
         }
     }
+
 
     val differ = AsyncListDiffer(this, differCallback)
 
@@ -54,4 +58,7 @@ class RecipeInfoAdapter : RecyclerView.Adapter<RecipeInfoAdapter.RecipeViewHolde
         return differ.currentList.size
     }
 
+    fun setOnItemClickListener(listener : (RecipeInfo) -> Unit){
+        onItemClickListener = listener
+    }
 }

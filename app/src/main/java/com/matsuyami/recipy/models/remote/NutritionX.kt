@@ -2,6 +2,7 @@ package com.recipy.models
 
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class NutritionX(
     @SerializedName("calories")
@@ -18,4 +19,4 @@ data class NutritionX(
     val sugar: Int,
     @SerializedName("updated_at")
     val updatedAt: String
-)
+): Serializable
