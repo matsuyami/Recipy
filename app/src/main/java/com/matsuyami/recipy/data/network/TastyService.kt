@@ -18,7 +18,7 @@ interface TastyService {
     @GET("recipes/list")
     suspend fun getRecipes(@Query("q") query : String?,
                    @Query("from") from : Int = 0,
-                   @Query("size") size : Int = 200) : Response<Recipes>
+                   @Query("size") size : Int = 100) : Response<Recipes>
 
     companion object{
         operator fun invoke() : TastyService {

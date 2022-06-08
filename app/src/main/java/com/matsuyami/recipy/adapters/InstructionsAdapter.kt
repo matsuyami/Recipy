@@ -24,9 +24,8 @@ class InstructionsAdapter(private val instructions: List<Instruction>) : Recycle
     // replace the contents of the view invoked by the layout manager
     override fun onBindViewHolder(holder: InstructionsAdapter.ViewHolder, position: Int) {
         // get elem from instructions and replace tv text with that elem text
-        holder.instructionText.text = instructions[position].displayText
-
         val realPosition = position + 1
+        holder.instructionText.text = instructions[position].displayText
         holder.instructionPos.text = realPosition.toString()
     }
 
