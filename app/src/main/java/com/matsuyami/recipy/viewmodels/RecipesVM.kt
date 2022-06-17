@@ -3,14 +3,16 @@ package com.matsuyami.recipy.viewmodels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.matsuyami.recipy.data.repositories.RecipeInfoRepo
 import com.matsuyami.recipy.data.repositories.RecipeSearchRepo
 import com.matsuyami.recipy.utils.Resource
+import com.recipy.models.RecipeInfo
 import com.recipy.models.Recipes
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
 
-class RecipeSearchVM(val recipeSearchRepo : RecipeSearchRepo) : ViewModel() {
+class RecipeVM(val recipeSearchRepo : RecipeSearchRepo) : ViewModel() {
     private val recipesFrom = 0
     val recipes : MutableLiveData<Resource<Recipes>> = MutableLiveData()
     var recipesResultSize = 200
@@ -29,4 +31,5 @@ class RecipeSearchVM(val recipeSearchRepo : RecipeSearchRepo) : ViewModel() {
         }
         return Resource.Error(resp.message())
     }
+
 }

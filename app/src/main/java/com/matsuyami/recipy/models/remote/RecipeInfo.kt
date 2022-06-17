@@ -1,10 +1,11 @@
 package com.recipy.models
 
-
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
+import java.util.UUID
 
 data class RecipeInfo(
+    var uuid : String?,
     @SerializedName("approved_at")
     val approvedAt: Int,
     @SerializedName("aspect_ratio")

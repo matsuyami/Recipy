@@ -9,6 +9,8 @@ import com.bumptech.glide.Glide
 import com.matsuyami.recipy.R
 import com.matsuyami.recipy.adapters.IngredientsAdapter
 import com.matsuyami.recipy.adapters.InstructionsAdapter
+import com.matsuyami.recipy.data.repositories.RecipeInfoRepo
+import com.matsuyami.recipy.viewmodels.RecipeDataVM
 import com.recipy.models.RecipeInfo
 
 class RecipeInfoActivity : AppCompatActivity() {
@@ -20,6 +22,10 @@ class RecipeInfoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_info)
         val recipeInfo = intent.getSerializableExtra("recipeInfo") as RecipeInfo
+
+        val dataVM = RecipeDataVM(RecipeInfoRepo(this@RecipeInfoActivity))
+        dataVM.saveRecipeInfo(recipeInfo)
+        dataVM.getRecipeInfo()
 
         setupFoodIV(recipeInfo)
         setupInstructionsRV(recipeInfo)
@@ -47,7 +53,9 @@ class RecipeInfoActivity : AppCompatActivity() {
         rvIngredients = findViewById(R.id.rvIngredients)
         rvIngredients.apply {
             adapter = ingredientsAdapter
-            layoutManager = LinearLayoutManager(this@RecipeInfoActivity)
+            layoutManager = LinearLayoutManager(this@RecipeInfoActivity).apply{
+
+            }
         }
     }
 }
