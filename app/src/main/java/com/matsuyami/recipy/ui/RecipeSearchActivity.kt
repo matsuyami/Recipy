@@ -13,14 +13,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.*
 import com.matsuyami.recipy.R
 import com.matsuyami.recipy.adapters.RecipeInfoAdapter
+import com.matsuyami.recipy.data.repositories.RecipeInfoRepo
 import com.matsuyami.recipy.data.repositories.RecipeSearchRepo
 import com.matsuyami.recipy.utils.Resource
-import com.matsuyami.recipy.viewmodels.RecipeSearchVM
+import com.matsuyami.recipy.viewmodels.RecipeVM
 
 class RecipeSearchActivity : AppCompatActivity() {
     private lateinit var searchView: SearchView
     private lateinit var rvRecipeInfo : RecyclerView
-    private lateinit var viewModel: RecipeSearchVM
+    private lateinit var viewModel: RecipeVM
     private lateinit var recipeInfoAdapter : RecipeInfoAdapter
 
     val TAG = "RecipeSearchActivity"
@@ -41,7 +42,7 @@ class RecipeSearchActivity : AppCompatActivity() {
 
         val recipeRepo = RecipeSearchRepo()
         val viewModelProviderFactory = RecipeSearchProvider(recipeRepo)
-        viewModel = ViewModelProvider(this, viewModelProviderFactory)[RecipeSearchVM::class.java]
+        viewModel = ViewModelProvider(this, viewModelProviderFactory)[RecipeVM::class.java]
 
         viewModel.recipes.observe(this, Observer{response ->
             when(response){
@@ -53,9 +54,6 @@ class RecipeSearchActivity : AppCompatActivity() {
                             it.description.isNotEmpty() &&
                             it.totalTimeTier != null
                         })
-
-
-                        Log.d(TAG, recipeResp.results.toString())
                     }
                 }
                 is Resource.Error ->{

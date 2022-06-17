@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.matsuyami.recipy.R
 import com.recipy.models.RecipeInfo
+import java.util.*
 
 class RecipeInfoAdapter : RecyclerView.Adapter<RecipeInfoAdapter.RecipeViewHolder>(){
     inner class RecipeViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
@@ -21,6 +22,7 @@ class RecipeInfoAdapter : RecyclerView.Adapter<RecipeInfoAdapter.RecipeViewHolde
             tvRecipeHeader.text = item.name
             // rounds corners
             ivFood.clipToOutline = true
+            item.uuid = UUID.randomUUID().toString()
             Glide.with(itemView).load(item.thumbnailUrl).into(ivFood)
             itemView.apply{
                 setOnClickListener{ onItemClickListener?.let{ it(item) } }
