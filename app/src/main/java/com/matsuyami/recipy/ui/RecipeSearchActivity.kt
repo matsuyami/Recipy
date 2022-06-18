@@ -90,6 +90,8 @@ class RecipeSearchActivity : AppCompatActivity() {
             }
         }
 
+
+
     }
 
     private fun hideProgressBar(){
