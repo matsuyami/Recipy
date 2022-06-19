@@ -19,10 +19,13 @@ class RecipeInfoAdapter : RecyclerView.Adapter<RecipeInfoAdapter.RecipeViewHolde
         private val tvRecipeHeader: TextView = itemView.findViewById(R.id.tvHeader)
         private val ivFood : ImageView = itemView.findViewById(R.id.ivFood)
         fun bind(item: RecipeInfo){
+            if(item.uuid == null){
+                item.uuid = UUID.randomUUID().toString()
+            }
+
             tvRecipeHeader.text = item.name
             // rounds corners
             ivFood.clipToOutline = true
-            item.uuid = UUID.randomUUID().toString()
             Glide.with(itemView).load(item.thumbnailUrl).into(ivFood)
             itemView.apply{
                 setOnClickListener{ onItemClickListener?.let{ it(item) } }

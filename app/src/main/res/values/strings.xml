@@ -3,4 +3,5 @@
     <string name="instructions">Instructions</string>
     <string name="ingredients">Ingredients</string>
     <string name="add_icon">add_icon</string>
+    <string name="add_to_favorites">ADD TO FAVORITES</string>
 </resources>

@@ -29,6 +29,7 @@
                 android:layout_height="104dp"
                 android:layout_gravity="center"
                 android:adjustViewBounds="false"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/round_outline"
                 android:cropToPadding="false"
                 android:scaleType="centerCrop"
