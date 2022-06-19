@@ -12,9 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Recipy">
         <activity
+            android:name=".ui.FavoritesActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.RecipeInfoActivity"
             android:exported="false" />
-
         <activity
             android:name=".ui.RecipeSearchActivity"
             android:exported="true">

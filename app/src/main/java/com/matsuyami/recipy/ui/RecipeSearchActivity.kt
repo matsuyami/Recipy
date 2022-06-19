@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.matsuyami.recipy.R
 import com.matsuyami.recipy.adapters.RecipeInfoAdapter
 import com.matsuyami.recipy.data.repositories.RecipeInfoRepo
@@ -23,6 +24,7 @@ class RecipeSearchActivity : AppCompatActivity() {
     private lateinit var rvRecipeInfo : RecyclerView
     private lateinit var viewModel: RecipeVM
     private lateinit var recipeInfoAdapter : RecipeInfoAdapter
+    private lateinit var bottomNavBar : BottomNavigationView
 
     val TAG = "RecipeSearchActivity"
 
@@ -31,6 +33,7 @@ class RecipeSearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_recipesearch)
 
         setupRecyclerView()
+        setupBottomNav()
 
         recipeInfoAdapter.setOnItemClickListener {
             val intent = Intent(this@RecipeSearchActivity, RecipeInfoActivity::class.java)
@@ -76,6 +79,7 @@ class RecipeSearchActivity : AppCompatActivity() {
 
         return super.onCreateOptionsMenu(menu)
     }
+
     private fun setupRecyclerView(){
         recipeInfoAdapter = RecipeInfoAdapter()
 
@@ -89,7 +93,17 @@ class RecipeSearchActivity : AppCompatActivity() {
             flexWrap = FlexWrap.WRAP
             }
         }
+    }
 
+    private fun setupBottomNav(){
+        bottomNavBar = findViewById(R.id.bottomNavBar)
+        bottomNavBar.setOnItemSelectedListener{
+            when(it.itemId){
+                R.id.home -> startActivity(Intent(this, RecipeSearchActivity::class.java))
+                R.id.fav -> startActivity(Intent(this, FavoritesActivity::class.java))
+            }
+            true
+        }
     }
 
     private fun hideProgressBar(){
@@ -112,4 +126,5 @@ class RecipeSearchActivity : AppCompatActivity() {
             }
         })
     }
+
 }
