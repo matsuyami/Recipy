@@ -9,7 +9,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".ui.RecipeInfoActivity">
+    tools:context=".ui.fragments.RecipeInfo">
 
     <ImageView
         android:id="@+id/ivRecipeInfo"
