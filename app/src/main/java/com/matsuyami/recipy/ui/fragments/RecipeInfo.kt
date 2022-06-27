@@ -1,15 +1,15 @@
-package com.matsuyami.recipy.ui
+package com.matsuyami.recipy.ui.fragments
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.matsuyami.recipy.R
 import com.matsuyami.recipy.adapters.IngredientsAdapter
 import com.matsuyami.recipy.adapters.InstructionsAdapter
@@ -17,49 +17,47 @@ import com.matsuyami.recipy.data.repositories.RecipeInfoRepo
 import com.matsuyami.recipy.viewmodels.RecipeDataVM
 import com.recipy.models.RecipeInfo
 
-class RecipeInfoActivity : AppCompatActivity() {
+class RecipeInfo : Fragment(R.layout.fragment_recipe_info) {
     private lateinit var rvInstructions: RecyclerView
     private lateinit var rvIngredients: RecyclerView
     private lateinit var btnFavorites : Button
-    private lateinit var ivFood: ImageView
+    private lateinit var ivRecipeInfo : ImageView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_recipe_info)
-        val recipeInfo = intent.getSerializableExtra("recipeInfo") as RecipeInfo
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        ivRecipeInfo = view.findViewById(R.id.ivRecipeInfo)
+        rvInstructions = view.findViewById(R.id.rvInstructions)
+        btnFavorites = view.findViewById(R.id.btnFavorites)
+        rvIngredients = view.findViewById(R.id.rvIngredients)
 
-        val dataVM = RecipeDataVM(RecipeInfoRepo(this@RecipeInfoActivity))
-
+        val recipeInfo = arguments?.getSerializable("recipeInfo") as RecipeInfo
+        val dataVM = RecipeDataVM(RecipeInfoRepo(requireContext()))
         setupFoodIV(recipeInfo)
         setupInstructionsRV(recipeInfo)
         setupIngredientsRV(recipeInfo)
         setupBtn(dataVM, recipeInfo)
+        Log.d("RecipeInfoFragment", "onViewCreated")
     }
 
     private fun setupFoodIV(recipeInfo : RecipeInfo){
-        ivFood = findViewById(R.id.ivRecipeInfo)
-        Glide.with(this@RecipeInfoActivity)
+        Glide.with(this)
             .load(recipeInfo.thumbnailUrl)
-            .into(ivFood)
+            .into(ivRecipeInfo)
     }
-
-
 
     private fun setupInstructionsRV(recipeInfo: RecipeInfo) {
         val instructionsAdapter = InstructionsAdapter(recipeInfo.instructions)
-        rvInstructions = findViewById(R.id.rvInstructions)
         rvInstructions.apply {
             adapter = instructionsAdapter
-            layoutManager = LinearLayoutManager(this@RecipeInfoActivity)
+            layoutManager = LinearLayoutManager(requireContext())
         }
     }
 
     private fun setupIngredientsRV(recipeInfo: RecipeInfo){
         val ingredientsAdapter = IngredientsAdapter(recipeInfo.sections.first().components)
-        rvIngredients = findViewById(R.id.rvIngredients)
         rvIngredients.apply {
             adapter = ingredientsAdapter
-            layoutManager = LinearLayoutManager(this@RecipeInfoActivity).apply{
+            layoutManager = LinearLayoutManager(requireContext()).apply{
 
             }
         }
@@ -67,11 +65,9 @@ class RecipeInfoActivity : AppCompatActivity() {
 
 
     private fun setupBtn(dataVM : RecipeDataVM, recipeInfo : RecipeInfo){
-        btnFavorites = findViewById(R.id.btnFavorites)
-
         btnFavorites.setOnClickListener {
             dataVM.saveRecipeInfo(recipeInfo)
-            Toast.makeText(this@RecipeInfoActivity,
+            Toast.makeText(requireContext(),
                 "Added to favorites", Toast.LENGTH_SHORT).show()
         }
     }

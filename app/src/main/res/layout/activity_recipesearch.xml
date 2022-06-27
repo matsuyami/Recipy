@@ -6,16 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".ui.RecipeSearchActivity">
 
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvRecipeInfo"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_recipe_search"
         android:layout_width="380dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNavBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
+    />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavBar"

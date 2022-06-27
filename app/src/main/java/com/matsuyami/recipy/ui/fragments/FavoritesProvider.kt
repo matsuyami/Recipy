@@ -1,4 +1,4 @@
-package com.matsuyami.recipy.ui
+package com.matsuyami.recipy.ui.fragments
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
