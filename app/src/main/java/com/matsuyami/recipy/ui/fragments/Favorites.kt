@@ -15,7 +15,9 @@ import com.matsuyami.recipy.adapters.RecipeInfoAdapter
 import com.matsuyami.recipy.data.repositories.RecipeInfoRepo
 import com.matsuyami.recipy.viewmodels.RecipeDataVM
 import com.recipy.models.RecipeInfo
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class Favorites : Fragment(R.layout.fragment_favorites) {
     private lateinit var rvFavorites: RecyclerView
     private lateinit var recipeAdapter: RecipeInfoAdapter

@@ -6,21 +6,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.flexbox.*
 import com.matsuyami.recipy.R
 import com.matsuyami.recipy.adapters.RecipeInfoAdapter
-import com.matsuyami.recipy.data.repositories.RecipeSearchRepo
-import com.matsuyami.recipy.ui.RecipeSearchProvider
 import com.matsuyami.recipy.utils.Resource
 import com.matsuyami.recipy.viewmodels.RecipeVM
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class Search : Fragment() {
     private lateinit var rvRecipeInfo : RecyclerView
     private lateinit var recipeInfoAdapter : RecipeInfoAdapter
-    private lateinit var viewModel: RecipeVM
+
+    private val viewModel : RecipeVM by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +32,6 @@ class Search : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         rvRecipeInfo = view.findViewById(R.id.rvRecipeInfo)
-
         val queryString = arguments?.getString("query")
         setupRecyclerView()
 
@@ -45,10 +45,6 @@ class Search : Fragment() {
                 commit()
             }
         }
-
-        val recipeRepo = RecipeSearchRepo()
-        val viewModelProviderFactory = RecipeSearchProvider(recipeRepo)
-        viewModel = ViewModelProvider(this, viewModelProviderFactory)[RecipeVM::class.java]
 
         viewModel.recipes.observe(viewLifecycleOwner, Observer{response ->
             when(response){
