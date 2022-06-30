@@ -7,10 +7,6 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.matsuyami.recipy.data.local.RecipeDataStore
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
 
 const val PREFERENCES_NAME = "recipeInfo"
 val Context.dataStore: DataStore<Preferences>
@@ -23,17 +19,6 @@ class RecipeInfoRepo(private val context : Context) : RecipeDataStore{
             it[prefKey] = value
         }
     }
-
-//    override fun getString(key: String): String? {
-//        return try {
-//            val prefKey = stringPreferencesKey(key)
-//            val preferences = context.dataStore.data.first()
-//            preferences[prefKey]
-//        } catch (e : Exception){
-//            e.printStackTrace()
-//            null
-//        }
-//    }
 
     override suspend fun getAll() = context.dataStore.data
 

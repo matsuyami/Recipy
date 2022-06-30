@@ -16,7 +16,9 @@ import com.matsuyami.recipy.adapters.InstructionsAdapter
 import com.matsuyami.recipy.data.repositories.RecipeInfoRepo
 import com.matsuyami.recipy.viewmodels.RecipeDataVM
 import com.recipy.models.RecipeInfo
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RecipeInfo : Fragment(R.layout.fragment_recipe_info) {
     private lateinit var rvInstructions: RecyclerView
     private lateinit var rvIngredients: RecyclerView

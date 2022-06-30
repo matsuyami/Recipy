@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.ComponentActivity
 import androidx.appcompat.widget.SearchView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.matsuyami.recipy.R
 import com.matsuyami.recipy.ui.fragments.Favorites
 import com.matsuyami.recipy.ui.fragments.Search
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class RecipeSearchActivity : AppCompatActivity() {
     private lateinit var searchView: SearchView
     private lateinit var bottomNavBar : BottomNavigationView
@@ -22,14 +25,6 @@ class RecipeSearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_recipesearch)
 
         setupBottomNav()
-
-//        recipeInfoAdapter.setOnItemClickListener {
-//            val intent = Intent(this@RecipeSearchActivity, RecipeInfoFragment::class.java)
-//            intent.apply{
-//                putExtra("recipeInfo", it)
-//            }
-//            startActivity(intent)
-//        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
