@@ -13,12 +13,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RecipeVM @Inject constructor(
-        private val recipeSearchRepo : RecipeSearchRepo
-    ) : ViewModel() {
+    private val recipeSearchRepo: RecipeSearchRepo
+) : ViewModel() {
 
-    val recipes : MutableLiveData<Resource<Recipes>> = MutableLiveData()
+    val recipes: MutableLiveData<Resource<Recipes>> = MutableLiveData()
 
-    fun getRecipes(ingredient : String) = viewModelScope.launch{
+    fun getRecipes(ingredient: String) = viewModelScope.launch {
         val recipesFrom = 0
         val recipesResultSize = 200
         recipes.postValue(Resource.Loading())
@@ -26,13 +26,12 @@ class RecipeVM @Inject constructor(
         recipes.postValue(handleRecipeResponse(response))
     }
 
-    private fun handleRecipeResponse(resp : Response<Recipes>) : Resource<Recipes> {
-        if(resp.isSuccessful){
-            resp.body()?.let{ resultResponse ->
+    private fun handleRecipeResponse(resp: Response<Recipes>): Resource<Recipes> {
+        if (resp.isSuccessful) {
+            resp.body()?.let { resultResponse ->
                 return Resource.Success(resultResponse)
             }
         }
         return Resource.Error(resp.message())
     }
-
 }

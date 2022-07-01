@@ -18,7 +18,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient() : OkHttpClient {
+    fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .readTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(15, TimeUnit.SECONDS)
@@ -28,7 +28,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideTastyService(client : OkHttpClient): TastyService {
+    fun provideTastyService(client: OkHttpClient): TastyService {
         return Retrofit.Builder()
             .baseUrl("https://tasty.p.rapidapi.com/")
             .client(client)
@@ -38,8 +38,7 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRecipeSearchRepo(service: TastyService) : RecipeSearchRepo{
+    fun provideRecipeSearchRepo(service: TastyService): RecipeSearchRepo {
         return RecipeSearchRepo(service)
     }
-
 }

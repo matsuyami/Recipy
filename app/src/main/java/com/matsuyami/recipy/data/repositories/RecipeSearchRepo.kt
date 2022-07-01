@@ -5,8 +5,8 @@ import com.recipy.models.Recipes
 import retrofit2.Response
 import javax.inject.Inject
 
-class RecipeSearchRepo @Inject constructor(private val service: TastyService){
-   suspend fun searchRecipes(ingredientQuery: String, from : Int, size : Int) : Response<Recipes>{
-      return service.getRecipes(ingredientQuery, from, size)
-   }
+class RecipeSearchRepo @Inject constructor(private val service: TastyService) {
+    suspend fun searchRecipes(ingredientQuery: String, from: Int, size: Int): Response<Recipes> {
+        return service.getRecipes(ingredientQuery, from, size)
+    }
 }

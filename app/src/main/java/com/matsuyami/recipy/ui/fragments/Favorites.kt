@@ -8,7 +8,11 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.flexbox.*
+import com.google.android.flexbox.AlignItems
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import com.google.gson.Gson
 import com.matsuyami.recipy.R
 import com.matsuyami.recipy.adapters.RecipeInfoAdapter
@@ -43,17 +47,20 @@ class Favorites : Fragment(R.layout.fragment_favorites) {
             transaction?.commit()
         }
 
-        viewModel.data.observe(requireActivity(),Observer{
-            val recipes = it.asMap().values.map { value ->
-                Gson().fromJson(value.toString(), RecipeInfo::class.java)
-            }.toList()
+        viewModel.data.observe(
+            requireActivity(),
+            Observer {
+                val recipes = it.asMap().values.map { value ->
+                    Gson().fromJson(value.toString(), RecipeInfo::class.java)
+                }.toList()
 
-            Log.d("FavoriteFragment", "recipes: $recipes")
-            recipeAdapter.differ.submitList(recipes)
-        })
+                Log.d("FavoriteFragment", "recipes: $recipes")
+                recipeAdapter.differ.submitList(recipes)
+            }
+        )
     }
 
-    private fun setupRecyclerView(view : View) {
+    private fun setupRecyclerView(view: View) {
         rvFavorites = view.findViewById(R.id.favoriteItems)
         recipeAdapter = RecipeInfoAdapter()
         rvFavorites.apply {

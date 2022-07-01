@@ -1,11 +1,10 @@
 package com.matsuyami.recipy.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.ComponentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.matsuyami.recipy.R
@@ -16,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RecipeSearchActivity : AppCompatActivity() {
     private lateinit var searchView: SearchView
-    private lateinit var bottomNavBar : BottomNavigationView
+    private lateinit var bottomNavBar: BottomNavigationView
 
     val TAG = "RecipeSearchActivity"
 
@@ -35,11 +34,10 @@ class RecipeSearchActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-
-    private fun setupBottomNav(){
+    private fun setupBottomNav() {
         bottomNavBar = findViewById(R.id.bottomNavBar)
-        bottomNavBar.setOnItemSelectedListener{
-            when(it.itemId){
+        bottomNavBar.setOnItemSelectedListener {
+            when (it.itemId) {
                 R.id.home -> startActivity(Intent(this, RecipeSearchActivity::class.java))
                 R.id.fav -> {
                     supportFragmentManager.beginTransaction()
@@ -51,17 +49,16 @@ class RecipeSearchActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun setupSearchView(menuItem : MenuItem?){
+    private fun setupSearchView(menuItem: MenuItem?) {
         searchView = menuItem?.actionView as SearchView
         searchView.queryHint = "Search an ingredient..."
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(query: String?): Boolean {
                 return false
             }
 
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if(!query.isNullOrBlank()) {
+                if (!query.isNullOrBlank()) {
                     val searchFrag = Search()
                     val bundle = Bundle()
                     bundle.putString("query", query)
@@ -75,5 +72,4 @@ class RecipeSearchActivity : AppCompatActivity() {
             }
         })
     }
-
 }
