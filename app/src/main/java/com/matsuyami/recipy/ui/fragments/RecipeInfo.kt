@@ -22,8 +22,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class RecipeInfo : Fragment(R.layout.fragment_recipe_info) {
     private lateinit var rvInstructions: RecyclerView
     private lateinit var rvIngredients: RecyclerView
-    private lateinit var btnFavorites : Button
-    private lateinit var ivRecipeInfo : ImageView
+    private lateinit var btnFavorites: Button
+    private lateinit var ivRecipeInfo: ImageView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -41,7 +41,7 @@ class RecipeInfo : Fragment(R.layout.fragment_recipe_info) {
         Log.d("RecipeInfoFragment", "onViewCreated")
     }
 
-    private fun setupFoodIV(recipeInfo : RecipeInfo){
+    private fun setupFoodIV(recipeInfo: RecipeInfo) {
         Glide.with(this)
             .load(recipeInfo.thumbnailUrl)
             .into(ivRecipeInfo)
@@ -55,22 +55,22 @@ class RecipeInfo : Fragment(R.layout.fragment_recipe_info) {
         }
     }
 
-    private fun setupIngredientsRV(recipeInfo: RecipeInfo){
+    private fun setupIngredientsRV(recipeInfo: RecipeInfo) {
         val ingredientsAdapter = IngredientsAdapter(recipeInfo.sections.first().components)
         rvIngredients.apply {
             adapter = ingredientsAdapter
-            layoutManager = LinearLayoutManager(requireContext()).apply{
-
+            layoutManager = LinearLayoutManager(requireContext()).apply {
             }
         }
     }
 
-
-    private fun setupBtn(dataVM : RecipeDataVM, recipeInfo : RecipeInfo){
+    private fun setupBtn(dataVM: RecipeDataVM, recipeInfo: RecipeInfo) {
         btnFavorites.setOnClickListener {
             dataVM.saveRecipeInfo(recipeInfo)
-            Toast.makeText(requireContext(),
-                "Added to favorites", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                "Added to favorites", Toast.LENGTH_SHORT
+            ).show()
         }
     }
 }

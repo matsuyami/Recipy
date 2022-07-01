@@ -1,6 +1,5 @@
 package com.matsuyami.recipy.viewmodels
 
-import android.util.Log
 import androidx.datastore.preferences.core.Preferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,17 +11,17 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class RecipeDataVM(private val repo: RecipeInfoRepo) : ViewModel() {
-    var data : MutableLiveData<Preferences> = MutableLiveData()
+    var data: MutableLiveData<Preferences> = MutableLiveData()
 
-    fun saveRecipeInfo(data : RecipeInfo){
+    fun saveRecipeInfo(data: RecipeInfo) {
         viewModelScope.launch {
-            if(data.uuid != null){
+            if (data.uuid != null) {
                 repo.putString(data.uuid.toString(), Gson().toJson(data))
             }
         }
     }
 
-    fun getAll(){
+    fun getAll() {
         viewModelScope.launch {
             repo.getAll().collect {
                 data.postValue(it)

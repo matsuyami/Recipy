@@ -10,10 +10,10 @@ import com.bumptech.glide.Glide
 import com.matsuyami.recipy.R
 import com.recipy.models.ComponentX
 
-class IngredientsAdapter(private val components : List<ComponentX>) : RecyclerView.Adapter<IngredientsAdapter.ViewHolder>(){
-    class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val ingredientText : TextView = itemView.findViewById(R.id.ingredientText)
-        val addIcon : ImageView = itemView.findViewById(R.id.ivAddToList)
+class IngredientsAdapter(private val components: List<ComponentX>) : RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val ingredientText: TextView = itemView.findViewById(R.id.ingredientText)
+        val addIcon: ImageView = itemView.findViewById(R.id.ivAddToList)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

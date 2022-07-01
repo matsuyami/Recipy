@@ -2,14 +2,18 @@ package com.matsuyami.recipy.ui.fragments
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.flexbox.*
+import com.google.android.flexbox.AlignItems
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 import com.matsuyami.recipy.R
 import com.matsuyami.recipy.adapters.RecipeInfoAdapter
 import com.matsuyami.recipy.utils.Resource
@@ -18,14 +22,16 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class Search : Fragment() {
-    private lateinit var rvRecipeInfo : RecyclerView
-    private lateinit var recipeInfoAdapter : RecipeInfoAdapter
+    private lateinit var rvRecipeInfo: RecyclerView
+    private lateinit var recipeInfoAdapter: RecipeInfoAdapter
 
-    private val viewModel : RecipeVM by viewModels()
+    private val viewModel: RecipeVM by viewModels()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_search, container, false)
     }
 
@@ -46,51 +52,55 @@ class Search : Fragment() {
             }
         }
 
-        viewModel.recipes.observe(viewLifecycleOwner, Observer{response ->
-            when(response){
-                is Resource.Success -> {
-                    hideProgressBar()
-                    response.data?.let{ recipeResp ->
-                        Log.d("Search", recipeResp.toString())
-                        recipeInfoAdapter.differ.submitList(recipeResp.results.filter{
-                            it.description != null &&
-                            it.description.isNotEmpty() &&
-                            it.totalTimeTier != null
-                        })
+        viewModel.recipes.observe(
+            viewLifecycleOwner,
+            Observer { response ->
+                when (response) {
+                    is Resource.Success -> {
+                        hideProgressBar()
+                        response.data?.let { recipeResp ->
+                            Log.d("Search", recipeResp.toString())
+                            recipeInfoAdapter.differ.submitList(
+                                recipeResp.results.filter {
+                                    it.description != null &&
+                                        it.description.isNotEmpty() &&
+                                        it.totalTimeTier != null
+                                }
+                            )
+                        }
                     }
-                }
-                is Resource.Error ->{
-                    response.message?.let { msg ->
-                        Log.e("SearchFragment", "An error occurred: $msg")
+                    is Resource.Error -> {
+                        response.message?.let { msg ->
+                            Log.e("SearchFragment", "An error occurred: $msg")
+                        }
                     }
-                }
 
-                is Resource.Loading -> {
-                    showProgressBar()
+                    is Resource.Loading -> {
+                        showProgressBar()
+                    }
                 }
             }
-        })
+        )
 
         viewModel.getRecipes(queryString!!)
     }
 
-
-    private fun hideProgressBar(){
+    private fun hideProgressBar() {
     }
 
-    private fun showProgressBar(){
+    private fun showProgressBar() {
     }
 
-    private fun setupRecyclerView(){
+    private fun setupRecyclerView() {
         recipeInfoAdapter = RecipeInfoAdapter()
 
         rvRecipeInfo.apply {
             adapter = recipeInfoAdapter
-            layoutManager = FlexboxLayoutManager(requireContext()).apply{
-            justifyContent = JustifyContent.SPACE_EVENLY
-            alignItems= AlignItems.CENTER
-            flexDirection = FlexDirection.ROW
-            flexWrap = FlexWrap.WRAP
+            layoutManager = FlexboxLayoutManager(requireContext()).apply {
+                justifyContent = JustifyContent.SPACE_EVENLY
+                alignItems = AlignItems.CENTER
+                flexDirection = FlexDirection.ROW
+                flexWrap = FlexWrap.WRAP
             }
         }
     }

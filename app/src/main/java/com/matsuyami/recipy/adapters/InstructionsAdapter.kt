@@ -10,8 +10,8 @@ import com.recipy.models.Instruction
 
 class InstructionsAdapter(private val instructions: List<Instruction>) : RecyclerView.Adapter<InstructionsAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val instructionText : TextView = itemView.findViewById(R.id.instructionText)
-        val instructionPos : TextView = itemView.findViewById(R.id.instructionPos)
+        val instructionText: TextView = itemView.findViewById(R.id.instructionText)
+        val instructionPos: TextView = itemView.findViewById(R.id.instructionPos)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
