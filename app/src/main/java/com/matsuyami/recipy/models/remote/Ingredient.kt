@@ -3,7 +3,7 @@ package com.recipy.models
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-data class IngredientX(
+data class Ingredient(
     @SerializedName("created_at")
     val createdAt: Int,
     @SerializedName("display_plural")
