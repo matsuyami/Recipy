@@ -8,9 +8,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.matsuyami.recipy.R
-import com.recipy.models.ComponentX
+import com.recipy.models.Component
 
-class IngredientsAdapter(private val components: List<ComponentX>) : RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
+class IngredientsAdapter(private val components: List<Component>) : RecyclerView.Adapter<IngredientsAdapter.ViewHolder>() {
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val ingredientText: TextView = itemView.findViewById(R.id.ingredientText)
         val addIcon: ImageView = itemView.findViewById(R.id.ivAddToList)

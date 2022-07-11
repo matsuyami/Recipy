@@ -63,8 +63,7 @@ class Search : Fragment() {
                             recipeInfoAdapter.differ.submitList(
                                 recipeResp.results.filter {
                                     it.description != null &&
-                                        it.description.isNotEmpty() &&
-                                        it.totalTimeTier != null
+                                        it.description.isNotEmpty()
                                 }
                             )
                         }
